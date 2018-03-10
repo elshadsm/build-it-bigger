@@ -36,6 +36,7 @@ android {
 }
 
 dependencies {
+    compile project(":jokelib")
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     endpointsServer project(path: ':backend', configuration: 'endpoints')
     implementation 'com.android.support:appcompat-v7:27.1.0'
