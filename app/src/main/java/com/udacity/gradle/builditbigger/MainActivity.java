@@ -1,8 +1,10 @@
 package com.udacity.gradle.builditbigger;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,10 +48,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
-        String joke = jokeProvider.getJoke();
-        Intent intent = new Intent(this, JokeViewActivity.class);
-        intent.putExtra(JokeViewActivity.INTENT_JOKE_KEY, joke);
-        startActivity(intent);
+        new EndpointsAsyncTask().execute(this);
     }
 
 }
