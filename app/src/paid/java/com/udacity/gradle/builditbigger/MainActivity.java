@@ -6,18 +6,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.elshadsm.custom.jokelib.JokeProvider;
-
-
 public class MainActivity extends AppCompatActivity {
-
-    JokeProvider jokeProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        jokeProvider = new JokeProvider();
     }
 
     @Override
