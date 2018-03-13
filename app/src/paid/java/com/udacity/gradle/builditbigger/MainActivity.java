@@ -5,13 +5,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 
 public class MainActivity extends AppCompatActivity {
+
+    public ProgressBar spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        spinner = findViewById(R.id.progress_bar);
     }
 
     @Override
@@ -37,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
+        spinner.setVisibility(View.VISIBLE);
         new EndpointsAsyncTask().execute(this);
     }
 

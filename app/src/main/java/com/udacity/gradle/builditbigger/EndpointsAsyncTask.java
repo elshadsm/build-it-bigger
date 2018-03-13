@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.view.View;
 
 import com.elshadsm.custom.androidlibrary.activities.JokeViewActivity;
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -43,6 +44,7 @@ public class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
         try {
             return myApiService.getJoke().execute().getData();
         } catch (IOException e) {
+            ((MainActivity) context).spinner.setVisibility(View.GONE);
             return e.getMessage();
         }
     }
@@ -53,6 +55,7 @@ public class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
         intent.putExtra(JokeViewActivity.INTENT_JOKE_KEY, result);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
+        ((MainActivity) context).spinner.setVisibility(View.GONE);
     }
 
 }

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -15,12 +16,14 @@ import com.google.android.gms.ads.InterstitialAd;
 public class MainActivity extends AppCompatActivity {
 
     private InterstitialAd interstitialAd;
+    public ProgressBar spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         applyInterstitialAdConfiguration();
+        spinner = findViewById(R.id.progress_bar);
     }
 
     private void applyInterstitialAdConfiguration() {
@@ -74,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void handleTellJokeClick(View view) {
+        spinner.setVisibility(View.VISIBLE);
         if (interstitialAd.isLoaded()) {
             interstitialAd.show();
         } else {
