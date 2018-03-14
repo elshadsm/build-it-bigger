@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void tellJoke(View view) {
+    public void handleTellJokeClick(View view) {
         spinner.setVisibility(View.VISIBLE);
         new EndpointsAsyncTask().execute(this);
     }

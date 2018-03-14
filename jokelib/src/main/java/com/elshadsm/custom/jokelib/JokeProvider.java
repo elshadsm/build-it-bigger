@@ -3,7 +3,7 @@ package com.elshadsm.custom.jokelib;
 import java.util.Random;
 
 public class JokeProvider {
-    private String jokeArray[] = {
+    private final String jokeArray[] = {
             "First test joke",
             "Second test joke",
             "Third test joke",

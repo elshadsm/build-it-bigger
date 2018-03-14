@@ -7,5 +7,4 @@
             android:name=".activities.JokeViewActivity"
             android:label="@string/joke_view_activity_title" />
     </application>
-
 </manifest>
