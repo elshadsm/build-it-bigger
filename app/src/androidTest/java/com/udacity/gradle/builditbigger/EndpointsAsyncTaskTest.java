@@ -8,7 +8,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
 
 /**
  * Created by Elshad Seyidmammadov on 11.03.2018.
@@ -24,15 +26,17 @@ public class EndpointsAsyncTaskTest {
 
     @Test
     public void testDoInBackground() {
-        String result = null;
+        EndpointsAsyncTask.Result result = null;
         EndpointsAsyncTask endpointsAsyncTask = new EndpointsAsyncTask();
         endpointsAsyncTask.execute(activityTestRule.getActivity());
         try {
             result = endpointsAsyncTask.get();
-            Log.d(LOG_TAG, "A non-empty string was retrieved successfully: " + result);
+            Log.d(LOG_TAG, "A non-empty string was retrieved successfully: " + result.data);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertNotNull(result);
+        assert result != null;
+        assertNotNull(result.data);
+        assertFalse(result.error);
     }
 }

@@ -20,7 +20,7 @@ import java.io.IOException;
  * Created by Elshad Seyidmammadov on 11.03.2018.
  */
 
-public class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
+public class EndpointsAsyncTask extends AsyncTask<Context, Void, EndpointsAsyncTask.Result> {
 
     private static MyApi myApiService = null;
     @SuppressLint("StaticFieldLeak")
@@ -28,8 +28,18 @@ public class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
     @SuppressLint("StaticFieldLeak")
     private ProgressBar spinner;
 
+    class Result {
+        String data;
+        boolean error;
+
+        Result(String data, boolean error) {
+            this.data = data;
+            this.error = error;
+        }
+    }
+
     @Override
-    protected final String doInBackground(Context... params) {
+    protected final EndpointsAsyncTask.Result doInBackground(Context... params) {
         if (myApiService == null) {
             String ROOT_URL = "http://10.0.2.2:8080/_ah/api/";
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
@@ -46,17 +56,16 @@ public class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
         this.context = params[0];
         spinner = ((MainActivity) context).spinner;
         try {
-            return myApiService.getJoke().execute().getData();
+            return new Result(myApiService.getJoke().execute().getData(), false);
         } catch (IOException e) {
-            spinner.setVisibility(View.GONE);
-            return e.getMessage();
+            return new Result(e.getMessage(), true);
         }
     }
 
     @Override
-    protected void onPostExecute(String result) {
+    protected void onPostExecute(EndpointsAsyncTask.Result result) {
         Intent intent = new Intent(context, JokeViewActivity.class);
-        intent.putExtra(JokeViewActivity.INTENT_JOKE_KEY, result);
+        intent.putExtra(JokeViewActivity.INTENT_JOKE_KEY, result.data);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
         spinner.setVisibility(View.GONE);
